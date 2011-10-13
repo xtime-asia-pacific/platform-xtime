@@ -69,5 +69,7 @@
     
   <modules>
     <module>xbase</module>
+    <module>xannotations</module>
+    <module>xannotations-test</module>
   </modules>
 </project>
