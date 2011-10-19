@@ -20,7 +20,7 @@ import java.util.Set;
 
 
 /**
- * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#2 $
+ * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#3 $
  * $Author: savadhanula $
  * <p/>
  *  Process DataModel Annotation
@@ -62,7 +62,6 @@ public class DataModelProcessor extends AbstractCapClassProcessor{
      */
     protected String getCapClassName( Element element)
     {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,"getting cap class for "+ element.asType().toString());
         return element.getSimpleName().toString().substring(len);
     }
 }
