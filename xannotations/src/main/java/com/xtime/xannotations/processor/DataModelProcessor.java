@@ -1,45 +1,49 @@
 package com.xtime.xannotations.processor;
 
 import com.xtime.xannotations.DataModel;
+import org.kohsuke.MetaInfServices;
+import sun.misc.IOUtils;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.tools.Diagnostic.Kind;
 import javax.lang.model.element.TypeElement;
+import javax.tools.Diagnostic;
+import javax.tools.JavaFileObject;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
-import org.kohsuke.MetaInfServices;
+
 
 /**
- * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#1 $
+ * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#2 $
  * $Author: savadhanula $
  * <p/>
  *  Process DataModel Annotation
  */
 
 
-// @SupportedSourceVersion(SourceVersion.RELEASE_6)
-@MetaInfServices(Processor.class)
-public class DataModelProcessor extends AbstractProcessor{
+@SupportedSourceVersion(SourceVersion.RELEASE_6)
+@MetaInfServices(value=Processor.class)
+public class DataModelProcessor extends AbstractCapClassProcessor{
 
-
-    private List<Element> processingElement = new ArrayList<Element>();
+    private static int len = "Base".length();
 
     public DataModelProcessor()
-    {}
-
-
-    @Override
-    public Set<String> getSupportedOptions() {
-        return super.getSupportedOptions();
-
+    {
+        super();
     }
 
-    /**
+     @Override
+    public void init(ProcessingEnvironment processingEnvironment) {
+        super.init(processingEnvironment);
+    }
+
+    /*
      * Get supported annotationtypes
      * @return
      */
@@ -50,34 +54,15 @@ public class DataModelProcessor extends AbstractProcessor{
         return supportedAnnotationTypes;
     }
 
-    @Override
-    public void init(ProcessingEnvironment processingEnvironment) {
-        super.init(processingEnvironment);
-        processingEnv.getMessager().printMessage(Kind.NOTE," INIT..");
+
+    /**
+     * Remove "Base" from the class name to get cap class name
+     * @param element
+     * @return
+     */
+    protected String getCapClassName( Element element)
+    {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,"getting cap class for "+ element.asType().toString());
+        return element.getSimpleName().toString().substring(len);
     }
-
-    @Override
-    public boolean process(Set<? extends TypeElement> typeElements, RoundEnvironment roundEnvironment) {
-        if (!roundEnvironment.processingOver())
-        {
-            for (String annotationType: getSupportedAnnotationTypes())
-            {
-                Set<? extends Element> annotatedElements = roundEnvironment.getElementsAnnotatedWith(processingEnv.getElementUtils().getTypeElement(annotationType));
-                for (Element annotatedElement: annotatedElements)
-                    processingElement.add(annotatedElement);
-
-            }
-        }
-        else
-        {
-            processingEnv.getMessager().printMessage(Kind.NOTE,"Added the following elements");
-           for (Element annotatedElement: processingElement)
-           {
-               processingEnv.getMessager().printMessage(Kind.NOTE,"*", annotatedElement);
-           }
-            processingEnv.getMessager().printMessage(Kind.NOTE,"---------");
-        }
-        return false;
-    }
-
 }
