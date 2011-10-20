@@ -2,25 +2,19 @@ package com.xtime.xannotations.processor;
 
 import com.xtime.xannotations.DataModel;
 import org.kohsuke.MetaInfServices;
-import sun.misc.IOUtils;
 
-import javax.annotation.processing.*;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
-import javax.tools.JavaFileObject;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 
 /**
- * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#3 $
+ * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/DataModelProcessor.java#4 $
  * $Author: savadhanula $
  * <p/>
  *  Process DataModel Annotation
