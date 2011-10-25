@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/AbstractCapClassProcessor.java#1 $
+ * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/AbstractCapClassProcessor.java#2 $
  * $Author: savadhanula $
- * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/AbstractCapClassProcessor.java#1 $
+ * $Id: //development/xtime/trunk/xannotations/src/main/java/com/xtime/xannotations/processor/AbstractCapClassProcessor.java#2 $
  * <p/>
  * Description goes here
  */
@@ -107,7 +107,9 @@ public abstract class AbstractCapClassProcessor extends AbstractProcessor{
                 StringBuffer sb = new StringBuffer();
                 sb.append("package "+ packageName+";");
                 sb.append("\n\n/**\n * Automatically generated file. All modifications to this will be lost \n **/\n\n\n");
-                sb.append("\nimport com.xtime.xannotations.DAO;\n\n@DAO");
+                sb.append("\nimport com.xtime.xannotations.DAO;\n\n");
+                sb.append("\nimport javax.xml.bind.annotation.XmlRootElement;\n\n");
+                sb.append("\n@DAO\n@XmlRootElement\n");
                 sb.append("\n\npublic class "+ capClassName+" extends "+ fullyQualifiedClassName);
                 sb.append("{\n\n \t public "+ capClassName+"(){\n\t\t super();\n\t}\n\n\n}");
                 javaFileObject.openWriter().append(sb.toString()).close();
