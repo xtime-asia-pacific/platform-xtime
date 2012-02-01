@@ -71,5 +71,6 @@
     <module>xbase</module>
     <module>xannotations</module>
     <module>xannotations-test</module>
+    <module>xflex-base</module>
   </modules>
 </project>
