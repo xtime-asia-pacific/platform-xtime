@@ -30,6 +30,8 @@
 <!--
     <locales.dir>${basedir}/src/main/locales</locales.dir>
 -->
+
+     <flashplayer.version>9.0.0</flashplayer.version>
   </properties>
 
   <build>
@@ -50,6 +52,7 @@
 	</executions>
 	<configuration>
 	  <sourceFile>${flex.source.file}</sourceFile>
+          <targetPlayer>${flashplayer.version}</targetPlayer>
 	  <compiledLocales>
 	    <locale>en_US</locale>
 	    <locale>en_CA</locale>
@@ -57,6 +60,7 @@
 	    <locale>fr_CA</locale>
             <locale>fr_FR</locale>
             <locale>de_DE</locale>
+            <locale>xt_DEV</locale>
 	  </compiledLocales>
 	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
 	  <rslUrls>
