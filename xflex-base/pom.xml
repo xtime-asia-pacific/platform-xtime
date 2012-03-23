@@ -8,7 +8,7 @@
 ************************************************************
 -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>xtime</artifactId>
@@ -25,13 +25,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <flexmojo.version>3.2.0</flexmojo.version>
-<!-- The latest version of Flex 3 sdk. @suresh -->
+    <!-- The latest version of Flex 3 sdk. @suresh -->
     <flex.sdk.version>3.2.0.3958</flex.sdk.version>
-<!--
-    <locales.dir>${basedir}/src/main/locales</locales.dir>
--->
+    <!--
+        <locales.dir>${basedir}/src/main/locales</locales.dir>
+    -->
 
-     <flashplayer.version>9.0.0</flashplayer.version>
+    <flashplayer.version>9.0.0</flashplayer.version>
   </properties>
 
   <build>
@@ -53,6 +53,11 @@
 	<configuration>
 	  <sourceFile>${flex.source.file}</sourceFile>
           <targetPlayer>${flashplayer.version}</targetPlayer>
+	  <fonts> 
+            <managers> 
+              <manager>flash.fonts.AFEFontManager</manager>
+            </managers> 
+          </fonts> 
 	  <compiledLocales>
 	    <locale>en_US</locale>
 	    <locale>en_CA</locale>
@@ -66,18 +71,21 @@
 	  <rslUrls>
             <rsl>rsls/{artifactId}-{version}.{extension}</rsl>
           </rslUrls>
-	  <fonts> 
-            <managers> 
-              <manager>flash.fonts.AFEFontManager</manager>
-            </managers> 
-          </fonts> 
-	  <dependencies>
-            <dependency>
-              <groupId>com.adobe.flex</groupId>
-              <artifactId>flex-fontkit</artifactId>
-              <version>${flex.sdk.version}</version>
-            </dependency>
-	    <dependency>
+	</configuration>
+	<dependencies>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>flex-fontkit</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>jar</type>
+          </dependency>
+	  <dependency>
             <groupId>com.adobe.flex</groupId>
             <artifactId>afe</artifactId>
             <version>${flex.sdk.version}</version>
@@ -92,30 +100,18 @@
             <artifactId>rideau</artifactId>
             <version>${flex.sdk.version}</version>
           </dependency>
-          </dependencies>
-	</configuration>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
 
   <dependencies>
-
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>flex-framework</artifactId>
       <version>${flex.sdk.version}</version>
       <type>pom</type>
     </dependency>
-
-<!--
-    <dependency>
-      <groupId>com.adobe.flex.framework</groupId>
-      <artifactId>framework</artifactId>
-      <version>${flex.sdk.version}</version>
-      <type>rb.swc</type>
-      <classifier>fr_CA</classifier>
-    </dependency>
--->
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>framework</artifactId>
@@ -123,8 +119,6 @@
       <type>swc</type>
       <scope>caching</scope>
     </dependency>
-
-
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
@@ -132,8 +126,6 @@
       <type>swc</type>
       <scope>caching</scope>
     </dependency>
-
-
     <dependency>
       <groupId>org.sonatype.flexmojos</groupId>
       <artifactId>flexmojos-unittest-support</artifactId>
@@ -141,6 +133,6 @@
       <type>swc</type>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
+
 </project>
