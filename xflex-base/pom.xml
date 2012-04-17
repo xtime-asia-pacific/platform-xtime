@@ -78,6 +78,44 @@
             <artifactId>flex-framework</artifactId>
             <version>${flex.sdk.version}</version>
             <type>pom</type>
+            <exclusions>
+              <exclusion>
+                <groupId>com.adobe.flex.framework</groupId>
+                <artifactId>framework</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.adobe.flex</groupId>
+                <artifactId>compiler</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex.compiler</groupId>
+            <artifactId>asdoc</artifactId>
+            <type>zip</type>
+            <classifier>template</classifier>
+            <version>${flex.sdk.version}</version>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>swc</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>rb.swc</type>
           </dependency>
           <dependency>
             <groupId>com.adobe.flex</groupId>
@@ -121,9 +159,23 @@
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>framework</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>rb.swc</type>
+      <scope>caching</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
       <version>${flex.sdk.version}</version>
       <type>swc</type>
+      <scope>caching</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>rpc</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>rb.swc</type>
       <scope>caching</scope>
     </dependency>
     <dependency>
