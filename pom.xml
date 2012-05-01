@@ -65,10 +65,34 @@
         </plugin>
 
 
+        <!-- 
+             * Add BOM details to war's / jar's manifest.mf
+        -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
           <version>2.2</version>
+          <configuration>
+            <archive>
+              <manifestSections>
+                <manifestSection>
+                  <name>Xtime BOM </name>
+                  <manifestEntries>
+                    <build_number>${BUILD_TAG}</build_number>
+                    <buid_id>${BUILD_ID}</buid_id>
+                    <jenkins_url>${HUDSON_URL}/job/${JOB_NAME}/${BUILD_NUMBER}</jenkins_url>
+                  </manifestEntries>
+                </manifestSection>
+              </manifestSections>
+            </archive>
+          </configuration>
+        </plugin>
+
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.4</version>
           <configuration>
             <archive>
               <manifestSections>
