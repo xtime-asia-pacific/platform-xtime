@@ -78,9 +78,9 @@
                 <manifestSection>
                   <name>Xtime BOM </name>
                   <manifestEntries>
-                    <build_number>${BUILD_TAG}</build_number>
-                    <buid_id>${BUILD_ID}</buid_id>
-                    <jenkins_url>${HUDSON_URL}/job/${JOB_NAME}/${BUILD_NUMBER}</jenkins_url>
+                    <bom_build_number>${BUILD_TAG}</bom_build_number>
+                    <bom_buid_id>${BUILD_ID}</bom_buid_id>
+                    <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
                   </manifestEntries>
                 </manifestSection>
               </manifestSections>
@@ -99,9 +99,9 @@
                 <manifestSection>
                   <name>Xtime BOM </name>
                   <manifestEntries>
-                    <build_number>${BUILD_TAG}</build_number>
-                    <buid_id>${BUILD_ID}</buid_id>
-                    <jenkins_url>${HUDSON_URL}/job/${JOB_NAME}/${BUILD_NUMBER}</jenkins_url>
+                    <bom_build_number>${BUILD_TAG}</bom_build_number>
+                    <bom_buid_id>${BUILD_ID}</bom_buid_id>
+                    <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
                   </manifestEntries>
                 </manifestSection>
               </manifestSections>
