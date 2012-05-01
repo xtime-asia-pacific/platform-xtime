@@ -77,7 +77,7 @@
                   <manifestEntries>
                     <build_number>${BUILD_TAG}</build_number>
                     <buid_id>${BUILD_ID}</buid_id>
-                    <jenkins_url>${HUDSON_URL}</jenkins_url>
+                    <jenkins_url>${HUDSON_URL}/job/${JOB_NAME}/${BUILD_NUMBER}</jenkins_url>
                   </manifestEntries>
                 </manifestSection>
               </manifestSections>
