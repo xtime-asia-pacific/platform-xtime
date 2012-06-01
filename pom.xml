@@ -88,12 +88,14 @@
                 </manifestSection>
               </manifestSections>
             </archive>
+<!--
             <webResources>
               <resource>
                 <directory>src/main/bom</directory>
                 <filtering>true</filtering>
               </resource>
             </webResources>
+-->
           </configuration>
         </plugin>
 
