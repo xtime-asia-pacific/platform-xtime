@@ -126,5 +126,6 @@
     <module>xannotations</module>
     <module>xannotations-test</module>
     <module>xflex-base</module>
+    <module>xflex45-base</module>
   </modules>
 </project>

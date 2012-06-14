@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************
+*  Base POM for all flex applications                      *
+*  Defines flex mojos, flex sdk and flex unit dependencies *
+*  @Author Suresh Avadhanula                               *
+************************************************************
+-->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>xtime</artifactId>
+    <groupId>com.xtime</groupId>
+    <version>1</version>
+  </parent>
+  <groupId>com.xtime</groupId>
+  <artifactId>xflex45-base</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>xflex45-base</name>
+  <packaging>pom</packaging>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <flexmojo.version>3.2.0</flexmojo.version>
+    <!-- The latest version of Flex 3 sdk. @suresh -->
+    <flex.sdk.version>4.5.0.20967</flex.sdk.version>
+    <flashplayer.version>9.0.115</flashplayer.version>
+  </properties>
+
+  <build>
+    <sourceDirectory>src/main/flex</sourceDirectory>
+    <testSourceDirectory>src/test/flex</testSourceDirectory>
+    <plugins>
+      <plugin>
+	<groupId>org.sonatype.flexmojos</groupId>
+	<artifactId>flexmojos-maven-plugin</artifactId>
+	<version>3.2.0</version>
+	<extensions>true</extensions>
+	<executions>
+	  <execution>
+	    <goals>
+	      <goal>copy-flex-resources</goal>
+	    </goals>
+	  </execution>
+	</executions>
+	<configuration>
+	  <sourceFile>${flex.source.file}</sourceFile>
+          <targetPlayer>${flashplayer.version}</targetPlayer>
+	  <debug>false</debug>
+	  <fonts> 
+            <managers> 
+              <manager>flash.fonts.AFEFontManager</manager>
+            </managers> 
+          </fonts> 
+	  <compiledLocales>
+	    <locale>en_US</locale>
+	    <locale>en_CA</locale>
+            <locale>es_ES</locale>
+	    <locale>fr_CA</locale>
+            <locale>fr_FR</locale>
+            <locale>de_DE</locale>
+            <locale>xt_DEV</locale>
+	  </compiledLocales>
+	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
+	  <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
+	  <rslUrls>
+            <rsl>rsls/{artifactId}-{version}.{extension}</rsl>
+          </rslUrls>
+	</configuration>
+	<dependencies>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+            <exclusions>
+              <exclusion>
+                <groupId>com.adobe.flex.framework</groupId>
+                <artifactId>framework</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.adobe.flex</groupId>
+                <artifactId>compiler</artifactId>
+              </exclusion>
+            </exclusions>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex.compiler</groupId>
+            <artifactId>asdoc</artifactId>
+            <type>zip</type>
+            <classifier>template</classifier>
+            <version>${flex.sdk.version}</version>
+          </dependency>
+
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>swc</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>rb.swc</type>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>flex-fontkit</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>jar</type>
+          </dependency>
+	  <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>afe</artifactId>
+            <version>${flex.sdk.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex.compiler</groupId>
+            <artifactId>aglj40</artifactId>
+            <version>${flex.sdk.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>rideau</artifactId>
+            <version>${flex.sdk.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>framework</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>swc</type>
+<!--
+      <scope>caching</scope>
+-->
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>framework</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>rb.swc</type>
+<!--
+      <scope>caching</scope>
+-->
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>rpc</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>swc</type>
+<!--
+      <scope>caching</scope>
+-->
+    </dependency>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>rpc</artifactId>
+      <version>${flex.sdk.version}</version>
+      <type>rb.swc</type>
+<!--
+      <scope>caching</scope>
+-->
+    </dependency>
+    <dependency>
+      <groupId>org.sonatype.flexmojos</groupId>
+      <artifactId>flexmojos-unittest-support</artifactId>
+      <version>${flexmojo.version}</version>
+      <type>swc</type>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
