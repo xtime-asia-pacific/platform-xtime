@@ -24,10 +24,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <flexmojo.version>3.2.0</flexmojo.version>
+    <flexmojo.version>4.0-RC2</flexmojo.version>
     <!-- The latest version of Flex 3 sdk. @suresh -->
     <flex.sdk.version>4.5.0.20967</flex.sdk.version>
-    <flashplayer.version>9.0.115</flashplayer.version>
+    <flashplayer.version>11.0.0</flashplayer.version>
   </properties>
 
   <build>
@@ -37,7 +37,7 @@
       <plugin>
 	<groupId>org.sonatype.flexmojos</groupId>
 	<artifactId>flexmojos-maven-plugin</artifactId>
-	<version>3.2.0</version>
+	<version>4.0-RC2</version>
 	<extensions>true</extensions>
 	<executions>
 	  <execution>
@@ -136,6 +136,7 @@
             <artifactId>rideau</artifactId>
             <version>${flex.sdk.version}</version>
           </dependency>
+
         </dependencies>
       </plugin>
     </plugins>
