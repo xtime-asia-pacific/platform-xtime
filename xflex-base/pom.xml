@@ -27,10 +27,6 @@
     <flexmojo.version>3.2.0</flexmojo.version>
     <!-- The latest version of Flex 3 sdk. @suresh -->
     <flex.sdk.version>3.2.0.3958</flex.sdk.version>
-    <!--
-        <locales.dir>${basedir}/src/main/locales</locales.dir>
-    -->
-
     <flashplayer.version>9.0.115</flashplayer.version>
   </properties>
 
@@ -157,36 +153,24 @@
       <artifactId>framework</artifactId>
       <version>${flex.sdk.version}</version>
       <type>swc</type>
-<!--
-      <scope>caching</scope>
--->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>framework</artifactId>
       <version>${flex.sdk.version}</version>
       <type>rb.swc</type>
-<!--
-      <scope>caching</scope>
--->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
       <version>${flex.sdk.version}</version>
       <type>swc</type>
-<!--
-      <scope>caching</scope>
--->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
       <version>${flex.sdk.version}</version>
       <type>rb.swc</type>
-<!--
-      <scope>caching</scope>
--->
     </dependency>
     <dependency>
       <groupId>org.sonatype.flexmojos</groupId>
@@ -196,5 +180,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
 </project>
