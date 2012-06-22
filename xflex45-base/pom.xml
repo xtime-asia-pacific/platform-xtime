@@ -57,12 +57,6 @@
           </fonts> 
 	  <compiledLocales>
 	    <locale>en_US</locale>
-	    <locale>en_CA</locale>
-            <locale>es_ES</locale>
-	    <locale>fr_CA</locale>
-            <locale>fr_FR</locale>
-            <locale>de_DE</locale>
-            <locale>xt_DEV</locale>
 	  </compiledLocales>
 	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
 	  <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
