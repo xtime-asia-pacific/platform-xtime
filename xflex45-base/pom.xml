@@ -57,6 +57,7 @@
           </fonts> 
 	  <compiledLocales>
 	    <locale>en_US</locale>
+        <locale>xt_DEV</locale>
 	  </compiledLocales>
 	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
 	  <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
