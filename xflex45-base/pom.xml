@@ -55,10 +55,10 @@
               <manager>flash.fonts.AFEFontManager</manager>
             </managers> 
           </fonts>
-	  <localesRuntime>
+	  <localesCompiled>
 	    <locale>en_US</locale>
         <locale>xt_DEV</locale>
-	  </localesRuntime>
+	  </localesCompiled>
 	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
 	  <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
 	  <rslUrls>
