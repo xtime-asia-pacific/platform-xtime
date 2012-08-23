@@ -58,6 +58,8 @@
 	  <compiledLocales>
 	    <locale>en_US</locale>
 	    <locale>en_CA</locale>
+	    <locale>en_AU</locale>
+	    <locale>en_GB</locale>
             <locale>es_ES</locale>
 	    <locale>fr_CA</locale>
             <locale>fr_FR</locale>
