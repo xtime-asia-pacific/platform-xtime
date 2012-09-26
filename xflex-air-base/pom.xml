@@ -7,23 +7,20 @@
 *  @Author Suresh Avadhanula                               *
 ************************************************************
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+			     http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+	 xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
   <modelVersion>4.0.0</modelVersion>
-<!--
-  <parent>
-    <artifactId>xflex-base</artifactId>
-    <groupId>com.xtime</groupId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>../xflex-base/pom.xml</relativePath>
-  </parent>
--->
+
 
   <parent>
     <artifactId>xtime</artifactId>
     <groupId>com.xtime</groupId>
     <version>1.1</version>
   </parent>
+  
   <groupId>com.xtime</groupId>
   <artifactId>xflex-air-base</artifactId>
   <version>1.1-SNAPSHOT</version>
@@ -41,73 +38,6 @@
   <build>
     <sourceDirectory>src/main/flex</sourceDirectory>
     <testSourceDirectory>src/test/flex</testSourceDirectory>
-<!--
-    <plugins>
-      <plugin>
-        <groupId>org.sonatype.flexmojos</groupId>
-        <artifactId>flexmojos-maven-plugin</artifactId>
-	<version>3.9</version>
-        <extensions>true</extensions>
-        <dependencies>
-          <dependency>
-            <groupId>com.adobe.flex</groupId>
-            <artifactId>compiler</artifactId>
-            <version>${flex.sdk.version}</version>
-            <type>pom</type>
-          </dependency>
-          <dependency>
-            <groupId>com.adobe.flex</groupId>
-            <artifactId>adt</artifactId>
-            <version>${flex.sdk.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
--->
-          <!-- set this to true to allow the plugin to find the special Flex Builder/Flash Builder
-               string in the application descriptor which is normally in site the <content> tag. If you set
-               this to false or omit it entirely, the plugin will expect there to be an ${output} token
-               in that tag. Placing that token in the application descriptor will prevent the Export Release
-               Build function in Flex Builder/Flash Builder for working
-          -->
-<!--
-          <flexBuilderCompatibility>true</flexBuilderCompatibility>
-
-	  <sourceFile>${flex.source.file}</sourceFile>
-          <targetPlayer>${flashplayer.version}</targetPlayer>
-	  <debug>false</debug>
-	  <fonts> 
-            <managers> 
-              <manager>flash.fonts.AFEFontManager</manager>
-            </managers> 
-          </fonts> 
-          <descriptorTemplate>src/main/flex/${flex.source.file}-app.xml</descriptorTemplate>
-          <keystore>${keystore.file}</keystore>
-          <storepass>${keystore.password}</storepass>
--->
-
-          <!--optionally include files in the AIR package -->
-          <!--
-          <includeFileSets>
-          <fileSet>
-          <directory>src/main/resources/embedded</directory>
-          <includes>
-          <include>*.*</include>
-          </includes>
-          </fileSet>
-          </includeFileSets>
-          -->
-<!--
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>sign-air</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
--->
   </build>
 
   <dependencies>
