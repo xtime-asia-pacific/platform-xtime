@@ -7,21 +7,17 @@
 *  @Author Suresh Avadhanula                               *
 ************************************************************
 -->
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-			     http://maven.apache.org/xsd/maven-4.0.0.xsd" 
-	 xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>xtime</artifactId>
     <groupId>com.xtime</groupId>
-    <version>1.1</version>
+    <version>1</version>
   </parent>
-  
   <groupId>com.xtime</groupId>
   <artifactId>xflex45-base</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <name>xflex45-base</name>
   <packaging>pom</packaging>
   <url>http://maven.apache.org</url>
@@ -61,14 +57,14 @@
           </fonts>
 	  <localesCompiled>
 	    <locale>en_US</locale>
-            <locale>xt_DEV</locale>
+        <locale>xt_DEV</locale>
 	  </localesCompiled>
 	  <allowSourcePathOverlap>true</allowSourcePathOverlap>
 	  <staticLinkRuntimeSharedLibraries>true</staticLinkRuntimeSharedLibraries>
 	  <rslUrls>
             <rsl>rsls/{artifactId}-{version}.{extension}</rsl>
           </rslUrls>
-	</configuration>
+    </configuration>
 	<dependencies>
           <dependency>
             <groupId>com.adobe.flex.framework</groupId>
@@ -153,24 +149,36 @@
       <artifactId>framework</artifactId>
       <version>${flex.sdk.version}</version>
       <type>swc</type>
+<!--
+      <scope>caching</scope>
+-->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>framework</artifactId>
       <version>${flex.sdk.version}</version>
       <type>rb.swc</type>
+<!--
+      <scope>caching</scope>
+-->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
       <version>${flex.sdk.version}</version>
       <type>swc</type>
+<!--
+      <scope>caching</scope>
+-->
     </dependency>
     <dependency>
       <groupId>com.adobe.flex.framework</groupId>
       <artifactId>rpc</artifactId>
       <version>${flex.sdk.version}</version>
       <type>rb.swc</type>
+<!--
+      <scope>caching</scope>
+-->
     </dependency>
     <dependency>
       <groupId>org.sonatype.flexmojos</groupId>
