@@ -4,12 +4,12 @@
     <parent>
         <artifactId>xtime</artifactId>
         <groupId>com.xtime</groupId>
-        <version>1</version>
+        <version>1.2</version>
     </parent>
 
     <groupId>com.xtime</groupId>
     <artifactId>xsencha-base</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <name>xsencha-base</name>
     <packaging>pom</packaging>
 
@@ -23,6 +23,14 @@
         <!-- Default sencha commons version -->
         <sencha.commons.version>7.2-SNAPSHOT</sencha.commons.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xtime.sencha</groupId>
+            <artifactId>sencha-common</artifactId>
+            <version>${sencha.commons.version}</version>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <profile>

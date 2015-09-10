@@ -16,12 +16,12 @@
   <parent>
     <artifactId>xtime</artifactId>
     <groupId>com.xtime</groupId>
-    <version>1.1</version>
+    <version>1.2</version>
   </parent>
   
   <groupId>com.xtime</groupId>
   <artifactId>xflex45-base</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <name>xflex45-base</name>
   <packaging>pom</packaging>
   <url>http://maven.apache.org</url>
