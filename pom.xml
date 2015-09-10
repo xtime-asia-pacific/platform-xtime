@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xtime</groupId>
   <artifactId>xtime</artifactId>
-  <version>1</version>
+  <version>1.1</version>
   <packaging>pom</packaging>
   <name>XTime </name>
   <description>
@@ -125,10 +125,9 @@
   <!--This is a test comment -->
   <modules>
     <module>xbase</module>
-    <module>xannotations</module>
-    <module>xannotations-test</module>
     <module>xflex-base</module>
     <module>xflex-air-base</module>
     <module>xflex45-base</module>
+    <module>xsencha-base</module>
   </modules>
 </project>
