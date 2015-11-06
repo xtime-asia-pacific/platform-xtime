@@ -3,15 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>xbase</artifactId>
+        <artifactId>xbase2</artifactId>
         <groupId>com.xtime</groupId>
-        <version>2.0-SNAPSHOT</version>
-        <relativePath>../xbase/</relativePath> 
+        <version>2.1-SNAPSHOT</version>
+        <relativePath>../xbase2/</relativePath> 
     </parent>
 
-    <groupId>com.xtime</groupId>
-    <artifactId>xsencha-base</artifactId>
-    <name>xsencha-base</name>
+    <artifactId>xsencha-base2</artifactId>
+    <name>xsencha-base2</name>
     <packaging>pom</packaging>
 
     <properties>

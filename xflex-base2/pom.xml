@@ -15,15 +15,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>xtime</artifactId>
+    <artifactId>xtime2</artifactId>
     <groupId>com.xtime</groupId>
-    <version>2.0</version>
+    <version>2.1</version>
   </parent>
 
-  <groupId>com.xtime</groupId>
-  <artifactId>xflex-base</artifactId>
-  <version>2.0-SNAPSHOT</version>
-  <name>xflex-base</name>
+  <artifactId>xflex-base2</artifactId>
+  <version>2.1-SNAPSHOT</version>
+  <name>xflex-base2</name>
   <packaging>pom</packaging>
   <url>http://maven.apache.org</url>
 

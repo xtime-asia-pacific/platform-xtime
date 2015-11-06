@@ -3,10 +3,10 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xtime</groupId>
-  <artifactId>xtime</artifactId>
-  <version>2.0</version>
+  <artifactId>xtime2</artifactId>
+  <version>2.1</version>
   <packaging>pom</packaging>
-  <name>XTime </name>
+  <name>XTime2 </name>
   <description>
     XTime Inc
   </description>
@@ -124,10 +124,10 @@
 
   <!--This is a test comment -->
   <modules>
-    <module>xbase</module>
-    <module>xflex-base</module>
-    <module>xflex-air-base</module>
-    <module>xflex45-base</module>
-    <module>xsencha-base</module>
+    <module>xbase2</module>
+    <module>xflex-base2</module>
+    <module>xflex-air-base2</module>
+    <module>xflex45-base2</module>
+    <module>xsencha-base2</module>
   </modules>
 </project>
