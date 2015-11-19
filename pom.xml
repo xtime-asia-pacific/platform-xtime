@@ -41,6 +41,9 @@
     <bom.build.number>${BUILD_TAG}</bom.build.number>
     <bom.build.id>${BUILD_ID}</bom.build.id>
     <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
+    <maven.compiler.plugin.version>3.3</maven.compiler.plugin.version>
+    <maven.war.plugin.version>2.6</maven.war.plugin.version>
+    <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
   </properties>
 
   <profiles>
@@ -59,10 +62,10 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>2.0.2</version>
+          <version>${maven.compiler.plugin.version}</version>
           <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
+            <source>1.8</source>
+            <target>1.8</target>
             <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
@@ -74,7 +77,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-war-plugin</artifactId>
-          <version>2.2</version>
+          <version>${maven.war.plugin.version}</version>
           <configuration>
             <archive>
               <manifestSections>
@@ -101,7 +104,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.4</version>
+          <version>${maven.jar.plugin.version}</version>
           <configuration>
             <archive>
               <manifestSections>
