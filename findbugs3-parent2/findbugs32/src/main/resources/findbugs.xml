@@ -1,0 +1,4 @@
+<FindbugsPlugin defaultenabled="true">
+    <Detector class="com.xtime.platform.findbugs2.SessionFactoryDetector" speed="fast"/>
+    <BugPattern abbrev="HIBSFOPEN" type="HIBERNATE_SESSIONFACTORY_OPEN" category="CORRECTNESS"/>
+</FindbugsPlugin>
