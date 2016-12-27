@@ -27,11 +27,11 @@
   <distributionManagement>
     <repository>
       <id>releases</id>
-      <url>http://172.20.8.119:8000/nexus/content/repositories/releases</url>
+      <url>http://nexus-upload.xtime.com/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
       <id>releases</id>
-      <url>http://172.20.8.119:8000/nexus/content/repositories/snapshots</url>
+      <url>http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
 
