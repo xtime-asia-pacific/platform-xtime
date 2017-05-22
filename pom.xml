@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xtime</groupId>
   <artifactId>xtime2</artifactId>
-  <version>2.5-SNAPSHOT</version>
+  <version>2.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>XTime2 </name>
   <description>
@@ -42,14 +42,14 @@
     <bom.build.number>${BUILD_TAG}</bom.build.number>
     <bom.build.id>${BUILD_ID}</bom.build.id>
     <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
-    <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
+    <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
     <maven.war.plugin.version>3.0.0</maven.war.plugin.version>
     <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
     <junit.version>4.12</junit.version>
     <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
     <findbugs.maven.plugin3.version>3.0.4</findbugs.maven.plugin3.version>
     <findbugs.maven.plugin2.version>2.5.5</findbugs.maven.plugin2.version>
-    <maven-project-info-reports-plugin.version>2.8.1</maven-project-info-reports-plugin.version>
+    <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
   </properties>
 
   <profiles>
