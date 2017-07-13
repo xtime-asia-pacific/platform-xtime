@@ -56,6 +56,9 @@
 	  <fonts> 
             <managers> 
               <manager>flash.fonts.AFEFontManager</manager>
+              <manager>flash.fonts.CFFFontManager</manager>
+              <manager>flash.fonts.JREFontManager</manager>
+              <manager>flash.fonts.BatikFontManager</manager>
             </managers> 
           </fonts> 
 	  <compiledLocales>
