@@ -53,14 +53,14 @@
 	  <sourceFile>${flex.source.file}</sourceFile>
           <targetPlayer>${flashplayer.version}</targetPlayer>
 	  <debug>false</debug>
-	  <fonts> 
-            <managers> 
+	  <fonts>
+            <managers>
               <manager>flash.fonts.AFEFontManager</manager>
               <manager>flash.fonts.CFFFontManager</manager>
               <manager>flash.fonts.JREFontManager</manager>
               <manager>flash.fonts.BatikFontManager</manager>
-            </managers> 
-          </fonts> 
+            </managers>
+          </fonts>
 	  <compiledLocales>
 	    <locale>en_US</locale>
 	    <locale>en_CA</locale>
