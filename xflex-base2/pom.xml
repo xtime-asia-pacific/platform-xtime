@@ -38,6 +38,20 @@
     <testSourceDirectory>src/test/flex</testSourceDirectory>
     <plugins>
       <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <containerConfigXML>src/main/resources/META-INF/context.xml</containerConfigXML>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources/META-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>META-INF</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+      <plugin>
 	<groupId>org.sonatype.flexmojos</groupId>
 	<artifactId>flexmojos-maven-plugin</artifactId>
 	<version>3.2.0</version>
