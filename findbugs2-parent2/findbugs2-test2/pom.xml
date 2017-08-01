@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.xtime</groupId>
         <artifactId>findbugs2-parent2</artifactId>
-        <version>2.6-SNAPSHOT</version>
+        <version>2.7-SNAPSHOT</version>
     </parent>
 
     <artifactId>findbugs2-test2</artifactId>
