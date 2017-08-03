@@ -1,4 +1,4 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -6,11 +6,12 @@
         <artifactId>xbase2</artifactId>
         <groupId>com.xtime</groupId>
         <version>2.8-SNAPSHOT</version>
-        <relativePath>../xbase2/</relativePath> 
+        <relativePath>../xbase2/</relativePath>
     </parent>
 
     <artifactId>xsencha-base2</artifactId>
     <name>xsencha-base2</name>
+    <!--<version>2.7-SNAPSHOT</version>-->
     <packaging>pom</packaging>
 
     <properties>
@@ -21,28 +22,10 @@
         <jetty.stop.port>9966</jetty.stop.port>
         <web.xml.path>src/main/webapp/WEB-INF</web.xml.path>
 
-        <!-- Default sencha commons version -->
-        <sencha.commons.version>7.2-SNAPSHOT</sencha.commons.version>
-
-        <!-- Default extjs4-components version; child POMs should override this -->
-        <extjs4.components.version>7.19-SNAPSHOT</extjs4.components.version>
-
-        <!-- Default extjs4-components destination (works for DP); child POMs should override as neccessary; this is the folder that contains "packages" folder -->
-        <extjs4.components.destination>${project.basedir}/src/main/sencha-app</extjs4.components.destination>
+        <app.folder></app.folder>
+        <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha</sencha.cmd.bin>
+        <sencha.cmd.build.dir>${project.basedir}/src/main/sencha-app${app.folder}</sencha.cmd.build.dir>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.xtime.sencha</groupId>
-            <artifactId>sencha-common</artifactId>
-            <version>${sencha.commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xtime.sencha</groupId>
-            <artifactId>extjs4-components</artifactId>
-            <version>${extjs4.components.version}</version>
-        </dependency>
-    </dependencies>
 
     <profiles>
         <profile>
@@ -74,6 +57,19 @@
             </properties>
         </profile>
 
+        <!-- Change the executable of sencha  -->
+        <profile>
+            <id>sencha-cmd-bin</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha.exe</sencha.cmd.bin>
+            </properties>
+        </profile>
+
         <profile>
             <id>sencha-app-build</id>
             <activation>
@@ -85,78 +81,6 @@
             <build>
 
                 <plugins>
-
-                    <!-- Unpack various shared pieces -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>2.7</version>
-
-                        <executions>
-
-                            <!--
-                                Unpacks:
-                                    - "target/sencha-common"
-                                    - "src/main/sencha-app/ext"
-                            -->
-                            <execution>
-                                <id>sencha-extjs-common-unpack</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>com.xtime.sencha</groupId>
-                                            <artifactId>sencha-common</artifactId>
-                                            <version>${sencha.commons.version}</version>
-                                            <type>jar</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/sencha-common/sencha-common</outputDirectory>
-                                        </artifactItem>
-
-                                        <artifactItem>
-                                            <groupId>com.sencha</groupId>
-                                            <artifactId>${app.framework}</artifactId>
-                                            <version>${sdk.version}</version>
-                                            <type>jar</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.basedir}/src/main/sencha-app</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-
-                                    <excludes>META-INF/**</excludes>
-                                </configuration>
-                            </execution>
-
-                            <!-- 
-                                Unpack "common" extjs4-components repository into "src/main/sencha-app/packages" directory (or whatever
-                                is appropriate for project, based on property ${extjs4.components.destination})
-                            -->
-                            <execution>
-                                <id>extjs4-components-unpack</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>com.xtime.sencha</groupId>
-                                            <artifactId>extjs4-components</artifactId>
-                                            <version>${extjs4.components.version}</version>
-                                            <type>jar</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${extjs4.components.destination}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                    <includes>packages/**</includes>
-                                </configuration>
-                            </execution>
-
-                        </executions>
-                    </plugin>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -183,7 +107,7 @@
                                 <contextPath>/${project.build.finalName}</contextPath>
                                 <descriptor>${web.xml.path}/${web.xml}</descriptor>
                                 <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
-                                    <resourcesAsCSV>${project.build.directory}/sencha-common,src/main/sencha-app,src/main/webapp</resourcesAsCSV>
+                                    <resourcesAsCSV>src/main/sencha-app,src/main/webapp</resourcesAsCSV>
                                 </baseResource>
                             </webAppConfig>
                             <stopPort>${jetty.stop.port}</stopPort>
@@ -199,7 +123,7 @@
                         <executions>
 
                             <execution>
-                                <id>build properties</id>
+                                <id>sencha-setup-properties</id>
                                 <phase>initialize</phase>
 
                                 <goals>
@@ -208,11 +132,22 @@
 
                                 <configuration>
                                     <exportAntProperties>true</exportAntProperties>
-                                    <tasks>
+                                    <target>
                                         <property file="build.properties"/>
                                         <property file="src/main/sencha-app/.sencha/app/sencha.cfg"/>
-                                        <!--<echoproperties/>-->
-                                    </tasks>
+
+                                        <tstamp>
+                                            <format property="sencha.app.current.time" pattern="yyyyMMdd-hhmmss"/>
+                                        </tstamp>
+
+                                        <property environment="env"/>
+                                        <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <echo>Build number in production</echo>
+                                        <echo>BUILD_NUMBER: ${sencha.app.build.number}</echo>
+                                        <echo>sencha.app.resource.suffix: ${sencha.app.resource.suffix}</echo>
+                                        <echo>Application Name: ${app.folder}</echo>
+                                        <echo>Application Folder: ${sencha.cmd.build.dir}</echo>
+                                    </target>
                                 </configuration>
                             </execution>
 
@@ -231,12 +166,13 @@
                                         properties file that contains the folder where the build is located, then
                                         we copy that build folder to the final folder name that will be package as war
                                         -->
-                                        <exec executable="${sencha.cmd.bin}" dir="${project.basedir}/src/main/sencha-app">
+
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.cmd.build.dir}">
                                             <arg value="app"/>
                                             <arg value="build"/>
                                             <arg value="production"/>
                                         </exec>
-                                        <property file="${project.basedir}/src/main/sencha-app/sencha.cmd.properties"/>
+                                        <property file="${sencha.cmd.build.dir}/sencha.cmd.properties"/>
                                         <copy todir="${project.build.directory}/${project.build.finalName}" >
                                             <fileset dir="${sencha.cmd.build.dir}">
                                                 <exclude name="**/*.scss"/>
@@ -244,6 +180,13 @@
                                                 <exclude name="**/.sass-cache/**"/>
                                             </fileset>
                                         </copy>
+
+                                        <echo>Refreshing Sencha App (updates bootstraps)</echo>
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.cmd.build.dir}">
+                                            <arg value="app"/>
+                                            <arg value="refresh"/>
+                                        </exec>
+
                                     </target>
 
                                 </configuration>
