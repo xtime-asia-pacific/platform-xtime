@@ -11,7 +11,6 @@
 
     <artifactId>xsencha-base2</artifactId>
     <name>xsencha-base2</name>
-    <!--<version>2.7-SNAPSHOT</version>-->
     <packaging>pom</packaging>
 
     <properties>
@@ -174,7 +173,7 @@
                                         </exec>
                                         <property file="${sencha.cmd.build.dir}/sencha.cmd.properties"/>
                                         <copy todir="${project.build.directory}/${project.build.finalName}" >
-                                            <fileset dir="${sencha.cmd.build.dir}">
+                                            <fileset dir="${project.basedir}/src/main/sencha-app/build${app.folder}/production">
                                                 <exclude name="**/*.scss"/>
                                                 <exclude name="**/*.rb"/>
                                                 <exclude name="**/.sass-cache/**"/>
