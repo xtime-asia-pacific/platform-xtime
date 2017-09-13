@@ -21,6 +21,8 @@
         <jetty.stop.port>9966</jetty.stop.port>
         <web.xml.path>src/main/webapp/WEB-INF</web.xml.path>
 
+        <sencha.app.src>src/main/sencha-app</sencha.app.src>
+
         <app.folder></app.folder>
         <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha</sencha.cmd.bin>
         <sencha.cmd.build.dir>${project.basedir}/src/main/sencha-app${app.folder}</sencha.cmd.build.dir>
@@ -38,6 +40,7 @@
             <properties>
                 <web.xml>web.xml</web.xml>
                 <sencha.app.build.number>-${env.BUILD_NUMBER}</sencha.app.build.number>
+                <sencha.app.build.mode>production</sencha.app.build.mode>
             </properties>
 
         </profile>
@@ -53,6 +56,7 @@
             <properties>
                 <web.xml>web.development.xml</web.xml>
                 <sencha.app.build.number></sencha.app.build.number>
+                <sencha.app.build.mode>testing</sencha.app.build.mode>
             </properties>
         </profile>
 
@@ -133,7 +137,7 @@
                                     <exportAntProperties>true</exportAntProperties>
                                     <target>
                                         <property file="build.properties"/>
-                                        <property file="src/main/sencha-app/.sencha/app/sencha.cfg"/>
+                                        <property file="${sencha.app.src}/.sencha/app/sencha.cfg"/>
 
                                         <tstamp>
                                             <format property="sencha.app.current.time" pattern="yyyyMMdd-hhmmss"/>
@@ -141,11 +145,15 @@
 
                                         <property environment="env"/>
                                         <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <property name="sencha.app.build" value="src/main/sencha-app/build/${app.name}/${sencha.app.build.mode}"/>
+
                                         <echo>Build number in production</echo>
                                         <echo>BUILD_NUMBER: ${sencha.app.build.number}</echo>
                                         <echo>sencha.app.resource.suffix: ${sencha.app.resource.suffix}</echo>
-                                        <echo>Application Name: ${app.folder}</echo>
-                                        <echo>Application Folder: ${sencha.cmd.build.dir}</echo>
+                                        <echo>Application src folder: ${sencha.app.src}</echo>
+                                        <echo>Application build folder: ${sencha.app.build}</echo>
+                                        <echo>Application build mode: ${sencha.app.build.mode}</echo>
                                     </target>
                                 </configuration>
                             </execution>
@@ -165,15 +173,14 @@
                                         properties file that contains the folder where the build is located, then
                                         we copy that build folder to the final folder name that will be package as war
                                         -->
-
-                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.cmd.build.dir}">
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.app.src}">
                                             <arg value="app"/>
                                             <arg value="build"/>
-                                            <arg value="production"/>
+                                            <arg value="${sencha.app.build.mode}"/>
                                         </exec>
-                                        <property file="${sencha.cmd.build.dir}/sencha.cmd.properties"/>
+                                        <property file="${sencha.app.src}/sencha.cmd.properties"/>
                                         <copy todir="${project.build.directory}/${project.build.finalName}" >
-                                            <fileset dir="${project.basedir}/src/main/sencha-app/build${app.folder}/production">
+                                            <fileset dir="${sencha.app.build}">
                                                 <exclude name="**/*.scss"/>
                                                 <exclude name="**/*.rb"/>
                                                 <exclude name="**/.sass-cache/**"/>
@@ -181,7 +188,7 @@
                                         </copy>
 
                                         <echo>Refreshing Sencha App (updates bootstraps)</echo>
-                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.cmd.build.dir}">
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.app.src}">
                                             <arg value="app"/>
                                             <arg value="refresh"/>
                                         </exec>
