@@ -1,0 +1,107 @@
+---
+kind: pipeline
+type: docker
+name: linux-amd64
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+- name: setup
+  image: alpine:latest
+  environment:
+    USERNAME:
+      from_secret: username
+    PASSWORD:
+      from_secret: password
+  commands:
+    - mkdir -p ./.xtime
+    - touch ./.xtime/xtime.override.properties
+    - |
+        cat > ./settings.xml  << EOF
+        <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+          <servers>
+            <server>
+              <id>xtime</id>
+              <username>$USERNAME</username>
+              <password>$PASSWORD</password>
+            </server>
+          </servers>
+          <mirrors>
+            <mirror>
+              <id>nexus</id>
+              <mirrorOf>*</mirrorOf>
+              <url>http://nexus.xtime.com/nexus/content/groups/public</url>
+            </mirror>
+          </mirrors>
+          <profiles>
+            <profile>
+              <id>nexus</id>
+              <repositories>
+                <repository>
+                  <id>central</id>
+                  <url>http://central</url>
+                  <releases><enabled>true</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+              </repositories>
+
+              <pluginRepositories>
+                <pluginRepository>
+                  <id>central</id>
+                  <url>http://central</url>
+                  <releases><enabled>true</enabled></releases>
+                  <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+              </pluginRepositories>
+            </profile>
+          </profiles>
+          <pluginGroups>
+            <pluginGroup>com.xtime.maven.plugins</pluginGroup>
+          </pluginGroups>
+          <activeProfiles>
+            <activeProfile>nexus</activeProfile>
+          </activeProfiles>
+        </settings>
+        EOF
+
+- name: deploy
+  image: 498040579653.dkr.ecr.us-west-2.amazonaws.com/maven:3.6.3-amazoncorretto-11
+  volumes:
+    - name: docker_sock
+      path: /var/run/docker.sock
+  commands:
+    - yum install -q -y yum-utils
+    - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    - yum install docker-ce-cli -y -q
+    - curl -s -o /usr/bin/docker-credential-ecr-login https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login
+    - chmod +x /usr/bin/docker-credential-ecr-login
+    - echo $DRONE_COMMIT_MESSAGE | grep -q '[SKIP_TESTS]' && FLAGS="-DskipTests=true -Dmaven.test.skip=true -DskipITs"
+    - mvn $FLAGS -q -gs ./settings.xml clean deploy
+
+trigger:
+  branch:
+    exclude:
+    - master
+
+volumes:
+  - name: docker_sock
+    host:
+      path: /var/run/docker.sock
+
+
+#---
+#kind: secret
+#name: username
+#get:
+#  path: drone/deploy
+#  name: username
+#
+#---
+#kind: secret
+#name: password
+#get:
+#  path: drone/deploy
+#  name: password
+
+

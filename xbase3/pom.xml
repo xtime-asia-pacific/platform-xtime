@@ -24,10 +24,9 @@
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
@@ -65,51 +64,5 @@
 
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>tomcat7-maven-plugin</id>
-            <activation>
-                <jdk>[1.6,1.7,1.8]</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.tomcat.maven</groupId>
-                        <artifactId>tomcat7-maven-plugin</artifactId>
-                        <version>2.2</version>
-                        <configuration>
-                            <!-- http port -->
-                            <port>9090</port>
-                            <!-- application path always starts with /-->
-                            <path>/</path>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>tomcat8-maven-plugin</id>
-            <activation>
-                <jdk>1.8</jdk>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.tomcat.maven</groupId>
-                        <artifactId>tomcat8-maven-plugin</artifactId>
-                        <version>3.0</version>
-                        <configuration>
-                            <!-- http port -->
-                            <port>9090</port>
-                            <!-- application path always starts with /-->
-                            <path>/</path>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 
 </project>
