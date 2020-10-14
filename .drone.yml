@@ -71,9 +71,8 @@ steps:
     - name: docker_sock
       path: /var/run/docker.sock
   commands:
-    - yum install -q -y yum-utils
-    - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-    - yum install docker-ce-cli -y -q
+    - yum update -y
+    - amazon-linux-extras install docker -y
     - curl -s -o /usr/bin/docker-credential-ecr-login https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.4.0/linux-amd64/docker-credential-ecr-login
     - chmod +x /usr/bin/docker-credential-ecr-login
     - echo $DRONE_COMMIT_MESSAGE | grep -q '[SKIP_TESTS]' && FLAGS="-DskipTests=true -Dmaven.test.skip=true -DskipITs"
