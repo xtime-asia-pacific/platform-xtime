@@ -14,7 +14,7 @@
 
     <artifactId>xbase3</artifactId>
     <packaging>pom</packaging>
-    <name>XBase base 3 module</name>
+    <name>XBase3</name>
     <url>http://maven.apache.org</url>
 
     <properties>
