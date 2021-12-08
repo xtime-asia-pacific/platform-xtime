@@ -7,14 +7,14 @@
 
     <parent>
         <groupId>com.xtime</groupId>
-        <artifactId>xtime3</artifactId>
-        <version>3.0-SNAPSHOT</version>
+        <artifactId>xtime4</artifactId>
+        <version>4.0-SNAPSHOT</version>
     </parent>
 
 
-    <artifactId>xbase3</artifactId>
+    <artifactId>xbase4</artifactId>
     <packaging>pom</packaging>
-    <name>XBase3</name>
+    <name>XBase4</name>
     <url>http://maven.apache.org</url>
 
     <properties>
