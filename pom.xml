@@ -4,10 +4,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xtime</groupId>
-    <artifactId>xtime3</artifactId>
-    <version>3.0-SNAPSHOT</version>
+    <artifactId>xtime4</artifactId>
+    <version>4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>XTime3</name>
+    <name>XTime4</name>
     <description>
         XTime Inc
     </description>
@@ -46,11 +46,11 @@
         <!--suppress UnresolvedMavenProperty -->
         <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.war.plugin.version>3.3.1</maven.war.plugin.version>
+        <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
         <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
         <junit.version>5.7.1</junit.version>
         <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
-        <spotbugs.version>4.2.2</spotbugs.version>
+        <spotbugs.version>4.5.0</spotbugs.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
     </properties>
@@ -73,7 +73,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.plugin.version}</version>
                     <configuration>
-                        <release>1.8</release>
+                        <release>17</release>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
@@ -172,6 +172,6 @@
 
 
     <modules>
-        <module>xbase3</module>
+        <module>xbase4</module>
     </modules>
 </project>
