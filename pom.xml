@@ -2,144 +2,176 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.xtime</groupId>
-  <artifactId>xtime2</artifactId>
-  <version>2.9-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>XTime2 </name>
-  <description>
-    XTime Inc
-  </description>
-  <licenses>
-    <license>
-      <name>Commercial License</name>
-      <url/>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <organization>
-    <name>Xtime Inc</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xtime</groupId>
+    <artifactId>xtime3</artifactId>
+    <version>3.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>XTime3</name>
+    <description>
+        XTime Inc
+    </description>
+    <licenses>
+        <license>
+            <name>Commercial License</name>
+            <url/>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <organization>
+        <name>Xtime Inc</name>
+        <url>http://www.xtime.com/</url>
+    </organization>
     <url>http://www.xtime.com/</url>
-  </organization>
-  <url>http://www.xtime.com/</url>
 
-  <distributionManagement>
-    <repository>
-      <id>releases</id>
-      <url>http://nexus-upload.xtime.com/nexus/content/repositories/releases</url>
-    </repository>
-    <snapshotRepository>
-      <id>releases</id>
-      <url>http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://nexus-upload.xtime.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>releases</id>
+            <url>http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-  <!-- Configure properties-->
-  <properties>
-    <distMgmtSnapshotsName>Xtime Development Snapshot Repository</distMgmtSnapshotsName>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <bom.build.number>${BUILD_TAG}</bom.build.number>
-    <bom.build.id>${BUILD_ID}</bom.build.id>
-    <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
-    <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
-    <maven.war.plugin.version>3.1.0</maven.war.plugin.version>
-    <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
-    <junit.version>4.12</junit.version>
-    <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
-    <findbugs.maven.plugin3.version>3.0.5</findbugs.maven.plugin3.version>
-    <findbugs.maven.plugin2.version>2.5.5</findbugs.maven.plugin2.version>
-    <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
-  </properties>
+    <!-- Configure properties-->
+    <properties>
+        <distMgmtSnapshotsName>Xtime Development Snapshot Repository</distMgmtSnapshotsName>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--suppress UnresolvedMavenProperty -->
+        <bom.build.number>${BUILD_TAG}</bom.build.number>
+        <!--suppress UnresolvedMavenProperty -->
+        <bom.build.id>${BUILD_ID}</bom.build.id>
+        <!--suppress UnresolvedMavenProperty -->
+        <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.3.1</maven.war.plugin.version>
+        <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
+        <junit.version>5.7.1</junit.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <spotbugs.version>4.2.2</spotbugs.version>
+        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    </properties>
 
-  <profiles>
-    <profile>
-      <id>fast</id>
-      <properties>
-	<maven.test.skip>true</maven.test.skip>
-	<maven.javadoc.skip>true</maven.javadoc.skip>
-      </properties>
-    </profile>
-  </profiles>
+    <profiles>
+        <profile>
+            <id>fast</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <maven.javadoc.skip>true</maven.javadoc.skip>
+            </properties>
+        </profile>
+    </profiles>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven.compiler.plugin.version}</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
-        </plugin>
-
-
-        <!-- 
-             * Add BOM details to war's / jar's manifest.mf
-        -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>${maven.war.plugin.version}</version>
-          <configuration>
-            <archive>
-              <manifestSections>
-                <manifestSection>
-                  <name>Xtime BOM </name>
-                  <manifestEntries>
-                    <bom_build_number>${BUILD_TAG}</bom_build_number>
-                    <bom_build_id>${BUILD_ID}</bom_build_id>
-                    <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
-                  </manifestEntries>
-                </manifestSection>
-              </manifestSections>
-            </archive>
-            <webResources>
-              <resource>
-                <directory>src/main/bom</directory>
-                <filtering>true</filtering>
-              </resource>
-            </webResources>
-          </configuration>
-        </plugin>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <release>1.8</release>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
 
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>${maven.jar.plugin.version}</version>
-          <configuration>
-            <archive>
-              <manifestSections>
-                <manifestSection>
-                  <name>Xtime BOM </name>
-                  <manifestEntries>
-                    <bom_build_number>${BUILD_TAG}</bom_build_number>
-                    <bom_buid_id>${BUILD_ID}</bom_buid_id>
-                    <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
-                  </manifestEntries>
-                </manifestSection>
-              </manifestSections>
-            </archive>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+                <!--
+                     * Add BOM details to war's / jar's manifest.mf
+                -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven.war.plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifestSections>
+                                <manifestSection>
+                                    <name>Xtime BOM</name>
+                                    <manifestEntries>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_build_number>${BUILD_TAG}</bom_build_number>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_build_id>${BUILD_ID}</bom_build_id>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
+                                    </manifestEntries>
+                                </manifestSection>
+                            </manifestSections>
+                        </archive>
+                        <webResources>
+                            <resource>
+                                <directory>src/main/bom</directory>
+                                <filtering>true</filtering>
+                            </resource>
+                        </webResources>
+                    </configuration>
+                </plugin>
 
 
-  <!--This is a test comment -->
-  <modules>
-    <module>build-tools2</module>
-    <module>findbugs2-parent2</module>
-    <module>findbugs3-parent2</module>
-    <module>xbase2</module>
-    <module>xflex-base2</module>
-    <module>xflex-air-base2</module>
-    <module>xflex45-base2</module>
-    <module>xsencha-base2</module>
-  </modules>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.jar.plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifestSections>
+                                <manifestSection>
+                                    <name>Xtime BOM</name>
+                                    <manifestEntries>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_build_number>${BUILD_TAG}</bom_build_number>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_buid_id>${BUILD_ID}</bom_buid_id>
+                                        <!--suppress MavenModelInspection -->
+                                        <bom_jenkins_url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom_jenkins_url>
+                                    </manifestEntries>
+                                </manifestSection>
+                            </manifestSections>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven-plugin.version}</version>
+                    <configuration>
+                        <generateBackupPoms>false</generateBackupPoms>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${spotbugs.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                    <configuration>
+                        <skip>false</skip>
+                        <deployAtEnd>true</deployAtEnd>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+
+        </pluginManagement>
+    </build>
+
+
+    <modules>
+        <module>xbase3</module>
+    </modules>
 </project>
