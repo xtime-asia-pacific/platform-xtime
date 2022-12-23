@@ -4,10 +4,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xtime</groupId>
-    <artifactId>xtime4</artifactId>
-    <version>4.0-SNAPSHOT</version>
+    <artifactId>xtime5</artifactId>
+    <version>5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>XTime4</name>
+    <name>XTime5</name>
     <description>
         XTime Inc
     </description>
@@ -45,14 +45,15 @@
         <bom.build.id>${BUILD_ID}</bom.build.id>
         <!--suppress UnresolvedMavenProperty -->
         <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
-        <maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
-        <junit.version>5.7.1</junit.version>
-        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
-        <spotbugs-maven-plugin.version>4.5.0.0</spotbugs-maven-plugin.version>
-        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+        <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <spotbugs-maven-plugin.version>4.7.3.0</spotbugs-maven-plugin.version>
+        <versions-maven-plugin.version>2.14.1</versions-maven-plugin.version>
+        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
+        <junit5.version>5.9.1</junit5.version>
+        <junit4.version>4.13.2</junit4.version>
     </properties>
 
     <profiles>
@@ -68,16 +69,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven.compiler.plugin.version}</version>
-                    <configuration>
-                        <release>17</release>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-
 
                 <!--
                      * Add BOM details to war's / jar's manifest.mf
@@ -172,6 +163,8 @@
 
 
     <modules>
-        <module>xbase4</module>
+        <module>xbase5_17</module>
+        <module>xbase5_8_junit5</module>
+        <module>xbase5_8_junit4</module>
     </modules>
 </project>
