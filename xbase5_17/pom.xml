@@ -7,15 +7,14 @@
 
     <parent>
         <groupId>com.xtime</groupId>
-        <artifactId>xtime4</artifactId>
-        <version>4.0-SNAPSHOT</version>
+        <artifactId>xtime5</artifactId>
+        <version>5.0-SNAPSHOT</version>
     </parent>
 
 
-    <artifactId>xbase4</artifactId>
+    <artifactId>xbase5_17</artifactId>
     <packaging>pom</packaging>
-    <name>XBase4</name>
-    <url>http://maven.apache.org</url>
+    <name>XBase5_17</name>
 
     <properties>
         <generated.sources>target/generated-sources/java</generated.sources>
@@ -25,7 +24,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -33,6 +32,16 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <release>17</release>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
