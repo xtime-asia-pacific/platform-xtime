@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xtime</groupId>
     <artifactId>xtime5</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>XTime5</name>
     <description>
@@ -45,14 +45,14 @@
         <bom.build.id>${BUILD_ID}</bom.build.id>
         <!--suppress UnresolvedMavenProperty -->
         <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
-        <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
         <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
-        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
-        <spotbugs-maven-plugin.version>4.7.3.0</spotbugs-maven-plugin.version>
-        <versions-maven-plugin.version>2.14.1</versions-maven-plugin.version>
-        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
-        <junit5.version>5.9.1</junit5.version>
+        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
+        <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+        <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
+        <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version>
+        <junit5.version>5.9.2</junit5.version>
         <junit4.version>4.13.2</junit4.version>
     </properties>
 
@@ -152,13 +152,73 @@
                     <version>${maven-deploy-plugin.version}</version>
                     <configuration>
                         <skip>false</skip>
-                        <deployAtEnd>true</deployAtEnd>
+<!--                        <deployAtEnd>true</deployAtEnd>-->
                     </configuration>
+
+                    <executions>
+                        <execution>
+                            <id>default-deploy</id>
+                            <phase>none</phase>
+                        </execution>
+
+                            <execution>
+                                <id>deploy-nexus</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                                <configuration>
+                                    <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
+                                    <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
+                                </configuration>
+                            </execution>
+                        <execution>
+                            <id>deploy-artifactory</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                            <configuration>
+                                <altDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altDeploymentRepository>
+                                <altSnapshotDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altSnapshotDeploymentRepository>
+                            </configuration>
+                        </execution>
+                    </executions>
+
                 </plugin>
 
             </plugins>
 
         </pluginManagement>
+
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-deploy-plugin</artifactId>-->
+<!--                <executions>-->
+<!--&lt;!&ndash;                    <execution>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <id>deploy-nexus</id>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <phase>deploy</phase>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <goal>deploy</goal>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </goals>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <altDeploymentRepository>releases:http://nexus-upload.xtime.com/nexus/content/repositories/releases</altDeploymentRepository>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </execution>&ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>deploy-artifactory</id>-->
+<!--                        <phase>deploy</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>deploy</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <altDeploymentRepository>artifactory:https://artifactory.coxautoinc.com/artifactory/xtime-maven/</altDeploymentRepository>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
     </build>
 
 
