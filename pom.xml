@@ -62,6 +62,8 @@
             <properties>
                 <maven.test.skip>true</maven.test.skip>
                 <maven.javadoc.skip>true</maven.javadoc.skip>
+                <skipTests>true</skipTests>
+                <skipITs>true</skipITs>
             </properties>
         </profile>
     </profiles>
@@ -161,17 +163,18 @@
                             <phase>none</phase>
                         </execution>
 
-                            <execution>
-                                <id>deploy-nexus</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                                <configuration>
-                                    <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
-                                    <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
-                                </configuration>
-                            </execution>
+                        <execution>
+                            <id>deploy-nexus</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                            <configuration>
+                                <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
+                                <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
+                            </configuration>
+                        </execution>
+
                         <execution>
                             <id>deploy-artifactory</id>
                             <phase>deploy</phase>
@@ -191,34 +194,6 @@
 
         </pluginManagement>
 
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-deploy-plugin</artifactId>-->
-<!--                <executions>-->
-<!--&lt;!&ndash;                    <execution>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <id>deploy-nexus</id>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <phase>deploy</phase>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <goal>deploy</goal>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <configuration>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <altDeploymentRepository>releases:http://nexus-upload.xtime.com/nexus/content/repositories/releases</altDeploymentRepository>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </configuration>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </execution>&ndash;&gt;-->
-<!--                    <execution>-->
-<!--                        <id>deploy-artifactory</id>-->
-<!--                        <phase>deploy</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>deploy</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <altDeploymentRepository>artifactory:https://artifactory.coxautoinc.com/artifactory/xtime-maven/</altDeploymentRepository>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
     </build>
 
 
