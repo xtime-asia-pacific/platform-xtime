@@ -66,6 +66,130 @@
                 <skipITs>true</skipITs>
             </properties>
         </profile>
+        <profile>
+            <id>artifactory_nexus</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>${maven-deploy-plugin.version}</version>
+                            <configuration>
+                                <skip>false</skip>
+                                <!--                        <deployAtEnd>true</deployAtEnd>-->
+                            </configuration>
+
+                            <executions>
+                                <execution>
+                                    <id>default-deploy</id>
+                                    <phase>none</phase>
+                                </execution>
+
+                                <execution>
+                                    <id>deploy-nexus</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                    <configuration>
+                                        <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
+                                        <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
+                                    </configuration>
+                                </execution>
+
+                                <execution>
+                                    <id>deploy-artifactory</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                    <configuration>
+                                        <altDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altDeploymentRepository>
+                                        <altSnapshotDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altSnapshotDeploymentRepository>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>nexus</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>${maven-deploy-plugin.version}</version>
+                            <configuration>
+                                <skip>false</skip>
+                                <!--                        <deployAtEnd>true</deployAtEnd>-->
+                            </configuration>
+
+                            <executions>
+                                <execution>
+                                    <id>default-deploy</id>
+                                    <phase>none</phase>
+                                </execution>
+
+                                <execution>
+                                    <id>deploy-nexus</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                    <configuration>
+                                        <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
+                                        <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>artifactory</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>${maven-deploy-plugin.version}</version>
+                            <configuration>
+                                <skip>false</skip>
+                                <!--                        <deployAtEnd>true</deployAtEnd>-->
+                            </configuration>
+
+                            <executions>
+                                <execution>
+                                    <id>default-deploy</id>
+                                    <phase>none</phase>
+                                </execution>
+
+                                <execution>
+                                    <id>deploy-artifactory</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                    <configuration>
+                                        <altDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altDeploymentRepository>
+                                        <altSnapshotDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altSnapshotDeploymentRepository>
+                                    </configuration>
+                                </execution>
+                            </executions>
+
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
     <build>
@@ -147,47 +271,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.plugin.version}</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${maven-deploy-plugin.version}</version>
-                    <configuration>
-                        <skip>false</skip>
-<!--                        <deployAtEnd>true</deployAtEnd>-->
-                    </configuration>
-
-                    <executions>
-                        <execution>
-                            <id>default-deploy</id>
-                            <phase>none</phase>
-                        </execution>
-
-                        <execution>
-                            <id>deploy-nexus</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>deploy</goal>
-                            </goals>
-                            <configuration>
-                                <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
-                                <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
-                            </configuration>
-                        </execution>
-
-                        <execution>
-                            <id>deploy-artifactory</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>deploy</goal>
-                            </goals>
-                            <configuration>
-                                <altDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altDeploymentRepository>
-                                <altSnapshotDeploymentRepository>artifactory::https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots/</altSnapshotDeploymentRepository>
-                            </configuration>
-                        </execution>
-                    </executions>
-
                 </plugin>
 
             </plugins>
