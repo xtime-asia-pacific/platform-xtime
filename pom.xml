@@ -284,5 +284,6 @@
         <module>xbase5_17</module>
         <module>xbase5_8_junit5</module>
         <module>xbase5_8_junit4</module>
+        <module>xsencha-base5</module>
     </modules>
 </project>
