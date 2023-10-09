@@ -1,0 +1,242 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>xbase5_8_junit4</artifactId>
+        <groupId>com.xtime</groupId>
+        <version>5.1-SNAPSHOT</version>
+        <relativePath>../xbase5_8_junit4/</relativePath>
+    </parent>
+
+    <artifactId>xsencha-base5</artifactId>
+    <name>xsencha-base5</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--
+            Default jetty stop port. Some time it is necessary to run xmenus, consumerportal or consumermobile at the same time.
+            But they can't run at the same time using the same stop port, so in the pom of those projects this can be changed.
+        -->
+        <jetty.stop.port>9966</jetty.stop.port>
+        <web.xml.path>src/main/webapp/WEB-INF</web.xml.path>
+
+        <sencha.app.src>src/main/sencha-app</sencha.app.src>
+
+        <app.folder></app.folder>
+        <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha</sencha.cmd.bin>
+        <sencha.cmd.build.dir>${project.basedir}/src/main/sencha-app${app.folder}</sencha.cmd.build.dir>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>production</name>
+                </property>
+            </activation>
+
+            <properties>
+                <web.xml>web.xml</web.xml>
+                <sencha.app.build.number>-${env.BUILD_NUMBER}</sencha.app.build.number>
+                <sencha.app.build.mode>production</sencha.app.build.mode>
+            </properties>
+
+        </profile>
+
+        <profile>
+            <id>development</id>
+            <activation>
+                <property>
+                    <name>!production</name>
+                </property>
+            </activation>
+
+            <properties>
+                <web.xml>web.development.xml</web.xml>
+                <sencha.app.build.number></sencha.app.build.number>
+                <sencha.app.build.mode>testing</sencha.app.build.mode>
+            </properties>
+        </profile>
+
+        <!-- Change the executable of sencha  -->
+        <profile>
+            <id>sencha-cmd-bin</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha.exe</sencha.cmd.bin>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>sencha-app-build</id>
+            <activation>
+                <file>
+                    <exists>build.properties</exists>
+                </file>
+            </activation>
+
+            <build>
+
+                <plugins>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <version>2.4</version>
+
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exploded</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.mortbay.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>8.1.7.v20120910</version>
+
+                        <configuration>
+                            <webAppConfig>
+                                <contextPath>/${project.build.finalName}</contextPath>
+                                <descriptor>${web.xml.path}/${web.xml}</descriptor>
+                                <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                                    <resourcesAsCSV>src/main/sencha-app,src/main/webapp</resourcesAsCSV>
+                                </baseResource>
+                            </webAppConfig>
+                            <stopPort>${jetty.stop.port}</stopPort>
+                            <stopKey>stopJetty</stopKey>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.7</version>
+
+                        <executions>
+
+                            <execution>
+                                <id>sencha-setup-properties</id>
+                                <phase>initialize</phase>
+
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+
+                                <configuration>
+                                    <exportAntProperties>true</exportAntProperties>
+                                    <target>
+                                        <property file="build.properties"/>
+                                        <property file="${sencha.app.src}/.sencha/app/sencha.cfg"/>
+
+                                        <tstamp>
+                                            <format property="sencha.app.current.time" pattern="yyyyMMdd-hhmmss"/>
+                                        </tstamp>
+
+                                        <property environment="env"/>
+                                        <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <property name="sencha.app.build" value="src/main/sencha-app/build/${app.name}/${sencha.app.build.mode}"/>
+
+                                        <echo>Build number in production</echo>
+                                        <echo>BUILD_NUMBER: ${sencha.app.build.number}</echo>
+                                        <echo>sencha.app.resource.suffix: ${sencha.app.resource.suffix}</echo>
+                                        <echo>Application src folder: ${sencha.app.src}</echo>
+                                        <echo>Application build folder: ${sencha.app.build}</echo>
+                                        <echo>Application build mode: ${sencha.app.build.mode}</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+
+                            <execution>
+                                <id>sencha-command-exec</id>
+                                <phase>prepare-package</phase>
+
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+
+                                <configuration>
+                                    <target>
+                                        <!--
+                                        First we need to execute the sencha build, that will create a
+                                        properties file that contains the folder where the build is located, then
+                                        we copy that build folder to the final folder name that will be package as war
+                                        -->
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.app.src}">
+                                            <arg value="app"/>
+                                            <arg value="build"/>
+                                            <arg value="${sencha.app.build.mode}"/>
+                                        </exec>
+                                        <property file="${sencha.app.src}/sencha.cmd.properties"/>
+                                        <copy todir="${project.build.directory}/${project.build.finalName}" >
+                                            <fileset dir="${sencha.app.build}">
+                                                <exclude name="**/*.scss"/>
+                                                <exclude name="**/*.rb"/>
+                                                <exclude name="**/.sass-cache/**"/>
+                                            </fileset>
+                                        </copy>
+
+                                        <echo>Refreshing Sencha App (updates bootstraps)</echo>
+                                        <exec executable="${sencha.cmd.bin}" dir="${sencha.app.src}">
+                                            <arg value="app"/>
+                                            <arg value="refresh"/>
+                                        </exec>
+
+                                    </target>
+
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+
+
+            </build>
+
+        </profile>
+
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>src/main/sencha-app</directory>
+                            <includes>
+                                <include>sencha.cmd.properties</include>
+                            </includes>
+                        </fileset>
+
+                        <fileset>
+                            <directory>src/main/sencha-app/build</directory>
+                        </fileset>
+
+                        <fileset>
+                            <directory>src/main/sencha-app/archive</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
