@@ -26,12 +26,14 @@
 
     <distributionManagement>
         <repository>
-            <id>releases</id>
-            <url>http://nexus-upload.xtime.com/nexus/content/repositories/releases</url>
+            <id>central</id>
+            <name>CAI Artifactory-releases</name>
+            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-releases</url>
         </repository>
         <snapshotRepository>
-            <id>releases</id>
-            <url>http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</url>
+            <id>snapshots</id>
+            <name>CAI Artifactory-snapshots</name>
+            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
