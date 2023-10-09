@@ -25,13 +25,8 @@
     <url>http://www.xtime.com/</url>
 
     <distributionManagement>
-        <repository>
-            <id>central</id>
-            <name>CAI Artifactory-releases</name>
-            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-releases</url>
-        </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>artifactory</id>
             <name>CAI Artifactory-snapshots</name>
             <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots</url>
         </snapshotRepository>
