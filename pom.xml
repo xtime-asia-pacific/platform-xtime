@@ -63,6 +63,43 @@
                 <skipITs>true</skipITs>
             </properties>
         </profile>
+
+        <profile>
+            <id>nexus</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>${maven-deploy-plugin.version}</version>
+                            <configuration>
+                                <skip>false</skip>
+                                <!--                        <deployAtEnd>true</deployAtEnd>-->
+                            </configuration>
+
+                            <executions>
+                                <execution>
+                                    <id>default-deploy</id>
+                                    <phase>none</phase>
+                                </execution>
+
+                                <execution>
+                                    <id>deploy-nexus</id>
+                                    <phase>deploy</phase>
+                                    <goals>
+                                        <goal>deploy</goal>
+                                    </goals>
+                                    <configuration>
+                                        <altDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altDeploymentRepository>
+                                        <altSnapshotDeploymentRepository>nexus::http://nexus-upload.xtime.com/nexus/content/repositories/snapshots</altSnapshotDeploymentRepository>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
     </profiles>
 
     <build>
@@ -149,6 +186,8 @@
             </plugins>
 
         </pluginManagement>
+
+
 
     </build>
 
