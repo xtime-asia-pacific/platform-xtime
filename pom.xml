@@ -24,13 +24,13 @@
     </organization>
     <url>http://www.xtime.com/</url>
 
-<!--    <distributionManagement>-->
-<!--        <snapshotRepository>-->
-<!--            <id>artifactory</id>-->
-<!--            <name>CAI Artifactory-snapshots</name>-->
-<!--            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots</url>-->
-<!--        </snapshotRepository>-->
-<!--    </distributionManagement>-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>artifactory</id>
+            <name>CAI Artifactory-snapshots</name>
+            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <!-- Configure properties-->
     <properties>
