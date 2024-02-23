@@ -43,11 +43,11 @@
         <!--suppress UnresolvedMavenProperty -->
         <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
         <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
-        <maven.war.plugin.version>3.4.1-SNAPSHOT</maven.war.plugin.version>
+        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
         <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
         <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-        <spotbugs-maven-plugin.version>4.8.3.2-SNAPSHOT</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.8.3.1</spotbugs-maven-plugin.version>
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
         <junit5.version>5.10.2</junit5.version>
     </properties>
