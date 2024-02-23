@@ -1,3 +1,4 @@
+<!--suppress CheckTagEmptyBody -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -5,8 +6,8 @@
     <parent>
         <artifactId>xbase5_8_junit4</artifactId>
         <groupId>com.xtime</groupId>
-        <version>5.1-SNAPSHOT</version>
-        <relativePath>../xbase5_8_junit4/</relativePath>
+        <version>5.2-SNAPSHOT</version>
+        <relativePath>../xbase5_8_junit4/pom.xml</relativePath>
     </parent>
 
     <artifactId>xsencha-base5</artifactId>
@@ -24,6 +25,7 @@
         <sencha.app.src>src/main/sencha-app</sencha.app.src>
 
         <app.folder></app.folder>
+        <!--suppress UnresolvedMavenProperty -->
         <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha</sencha.cmd.bin>
         <sencha.cmd.build.dir>${project.basedir}/src/main/sencha-app${app.folder}</sencha.cmd.build.dir>
     </properties>
@@ -39,6 +41,7 @@
 
             <properties>
                 <web.xml>web.xml</web.xml>
+                <!--suppress UnresolvedMavenProperty -->
                 <sencha.app.build.number>-${env.BUILD_NUMBER}</sencha.app.build.number>
                 <sencha.app.build.mode>production</sencha.app.build.mode>
             </properties>
@@ -69,6 +72,7 @@
                 </os>
             </activation>
             <properties>
+                <!--suppress UnresolvedMavenProperty -->
                 <sencha.cmd.bin>${env.SENCHA_CMD_3}/sencha.exe</sencha.cmd.bin>
             </properties>
         </profile>
@@ -144,14 +148,19 @@
                                         </tstamp>
 
                                         <property environment="env"/>
+                                        <!--suppress UnresolvedMavenProperty -->
                                         <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <!--suppress UnresolvedMavenProperty -->
                                         <property name="sencha.app.resource.suffix" value="-${sencha.app.current.time}${sencha.app.build.number}"/>
+                                        <!--suppress UnresolvedMavenProperty -->
                                         <property name="sencha.app.build" value="src/main/sencha-app/build/${app.name}/${sencha.app.build.mode}"/>
 
                                         <echo>Build number in production</echo>
                                         <echo>BUILD_NUMBER: ${sencha.app.build.number}</echo>
+                                        <!--suppress UnresolvedMavenProperty -->
                                         <echo>sencha.app.resource.suffix: ${sencha.app.resource.suffix}</echo>
                                         <echo>Application src folder: ${sencha.app.src}</echo>
+                                        <!--suppress UnresolvedMavenProperty -->
                                         <echo>Application build folder: ${sencha.app.build}</echo>
                                         <echo>Application build mode: ${sencha.app.build.mode}</echo>
                                     </target>
@@ -180,6 +189,7 @@
                                         </exec>
                                         <property file="${sencha.app.src}/sencha.cmd.properties"/>
                                         <copy todir="${project.build.directory}/${project.build.finalName}" >
+                                            <!--suppress UnresolvedMavenProperty -->
                                             <fileset dir="${sencha.app.build}">
                                                 <exclude name="**/*.scss"/>
                                                 <exclude name="**/*.rb"/>

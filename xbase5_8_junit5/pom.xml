@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.xtime</groupId>
         <artifactId>xtime5</artifactId>
-        <version>5.1-SNAPSHOT</version>
+        <version>5.2-SNAPSHOT</version>
     </parent>
 
 
@@ -18,7 +18,6 @@
 
     <properties>
         <generated.sources>target/generated-sources/java</generated.sources>
-        <junit5.version>5.9.2</junit5.version>
     </properties>
 
     <dependencies>

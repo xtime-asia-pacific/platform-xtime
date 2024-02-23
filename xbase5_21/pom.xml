@@ -1,8 +1,7 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-  http://maven.apache.org/maven-v4_0_0.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -11,10 +10,9 @@
         <version>5.2-SNAPSHOT</version>
     </parent>
 
-
-    <artifactId>xbase5_17</artifactId>
+    <artifactId>xbase5_21</artifactId>
     <packaging>pom</packaging>
-    <name>XBase5_17</name>
+    <name>XBase5_21</name>
 
     <properties>
         <generated.sources>target/generated-sources/java</generated.sources>
@@ -38,7 +36,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <release>17</release>
+                    <release>21</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
@@ -73,5 +71,4 @@
 
         </plugins>
     </build>
-
 </project>
