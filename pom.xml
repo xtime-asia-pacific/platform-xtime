@@ -4,10 +4,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xtime</groupId>
-    <artifactId>xtime5</artifactId>
-    <version>5.2-SNAPSHOT</version>
+    <artifactId>xtime6</artifactId>
+    <version>6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>XTime5</name>
+    <name>XTime6</name>
     <description>
         XTime Inc
     </description>
@@ -42,15 +42,14 @@
         <bom.build.id>${BUILD_ID}</bom.build.id>
         <!--suppress UnresolvedMavenProperty -->
         <bom.jenkins.url>${HUDSON_URL}job/${JOB_NAME}/${BUILD_NUMBER}</bom.jenkins.url>
-        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-        <maven.war.plugin.version>3.4.0</maven.war.plugin.version>
+        <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
+        <maven.war.plugin.version>3.4.1-SNAPSHOT</maven.war.plugin.version>
         <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
-        <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-        <spotbugs-maven-plugin.version>4.7.3.6</spotbugs-maven-plugin.version>
-        <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
-        <junit5.version>5.10.0</junit5.version>
-        <junit4.version>4.13.2</junit4.version>
+        <spotbugs-maven-plugin.version>4.8.3.2-SNAPSHOT</spotbugs-maven-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
+        <junit5.version>5.10.2</junit5.version>
     </properties>
 
     <profiles>
@@ -193,10 +192,6 @@
 
 
     <modules>
-        <module>xbase5_17</module>
-        <module>xbase5_21</module>
-        <module>xbase5_8_junit5</module>
-        <module>xbase5_8_junit4</module>
-        <module>xsencha-base5</module>
+        <module>xbase6_21</module>
     </modules>
 </project>
