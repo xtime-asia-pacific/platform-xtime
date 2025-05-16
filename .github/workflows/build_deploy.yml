@@ -1,0 +1,86 @@
+name: Manually build maven project and deploy
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+  workflow_call:
+    inputs:
+      java-version:
+        description: 'Java version'
+        type: string
+        default: '21'
+      maven_args:
+        description: maven_args
+        type: string
+        default: '-DskipTests=true -Dmaven.test.skip=true -DskipITs clean deploy'
+    
+  workflow_dispatch:
+    inputs:
+      java-version:
+        description: 'Java version'
+        required: true
+        default: '21'
+        type: choice
+        options:
+          - '21'
+      maven_args:
+        description: maven_args
+        required: false
+        default: '-DskipTests=true -Dmaven.test.skip=true -DskipITs  clean deploy'
+jobs:
+  build:
+    uses: XTime/.github/.github/workflows/mvn_build.yml@main
+    name: "Invoke MVN Build"
+    secrets: inherit
+    with:
+      java-version: ${{ inputs.java-version }}
+      check-pom-version: true
+#      mvn-test-phases-args: "clean compile"
+      mvn-build-phases-args: ${{ inputs.maven_args }}
+#      security-scan-file-location: "."
+
+  send-slack-notification:
+    # uses: XTime/shared-actions-hub/.github/workflows/slack-common-notification.yml@master
+    # needs: build
+    # if: always()
+    # name: "Send Slack Notification"
+    # secrets: inherit
+    # with:
+    #   build-failure: ${{ needs.build.result == 'failure' }}
+    #   slack-channel-id: "C078W39J99U" # xt-xcomm-builds
+    runs-on: CAI-Enterprise
+    needs: [build]
+    if: always()
+    steps:
+      - name: Pre Send Notification
+        id: pre-send
+        run: |
+          if [ -n "${{ needs.failure.outputs.failure }}" ]; then
+            colorcode="#e00043"
+            result="Failure ${{ needs.failure.outputs.failure }}"
+          else
+            colorcode="#5cb85c"
+            result="${{ needs.prebuild.outputs.image-tag }}"
+          fi
+                              
+          echo "colorcode=$colorcode" >> $GITHUB_OUTPUT
+          echo "result=$result" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
+      - uses: slackapi/slack-github-action@v1.25.0
+        with:
+          channel-id: "C078W39J99U" # xt-xcomm-builds
+          payload: |
+            {
+              "attachments": [
+                {
+                  "author_name": "XTime/${{ github.event.repository.name }}",
+                  "text": "Result: ${{ steps.pre-send.outputs.result }} \nJob link : https://ghe.coxautoinc.com/XTime/${{ github.event.repository.name }}/actions/runs/${{ github.run_id }}",
+                  "color":"${{ steps.pre-send.outputs.colorcode }}"
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.XTIMEBUILDS_SLACK_BOT_TOKEN }}
+      

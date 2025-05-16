@@ -1,0 +1,14 @@
+name: Push build maven project and deploy
+on: 
+  push:
+    branches:
+      - '**'
+      - '!master'
+jobs:
+  build:
+   if: contains(github.event.head_commit.message, '[DEPLOY]') 
+   uses: ./.github/workflows/build_deploy.yml
+   name: "Invoke Build Deploy"
+   secrets: inherit
+   with:
+     image-tag-suffix: ${{ github.sha }}
