@@ -35,10 +35,10 @@ jobs:
     name: "Invoke MVN Build"
     secrets: inherit
     with:
-      java-version: ${{ needs.prebuild.outputs.java-version }}
+      java-version: ${{ inputs.java-version }}
       check-pom-version: true
 #      mvn-test-phases-args: "clean compile"
-      mvn-build-phases-args: ${{ needs.prebuild.outputs.mvn-build-phases-args }} -Dxcomm.image.tag=${{ needs.prebuild.outputs.image-tag }}
+      mvn-build-phases-args: ${{ inputs.maven_args }}
 #      security-scan-file-location: "."
 
   send-slack-notification:
