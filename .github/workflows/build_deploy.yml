@@ -1,6 +1,10 @@
 name: Manually build maven project and deploy
 
 on:
+  push:
+    branches:
+      - '**'
+      - '!master'
   workflow_call:
     inputs:
       java-version:
@@ -11,6 +15,7 @@ on:
         description: maven_args
         type: string
         default: '-DskipTests=true -Dmaven.test.skip=true -DskipITs clean deploy'
+    
   workflow_dispatch:
     inputs:
       java-version:
