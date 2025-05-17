@@ -57,12 +57,12 @@ jobs:
       - name: Pre Send Notification
         id: pre-send
         run: |
-          if [ -n "${{ needs.failure.outputs.failure }}" ]; then
+          if [ "${{ needs.build.result }}" == 'failure' ]; then
             colorcode="#e00043"
-            result="Failure ${{ needs.failure.outputs.failure }}"
+            result="${{join(needs.build.outputs.*, '\n')}}"
           else
             colorcode="#5cb85c"
-            result="${{ needs.prebuild.outputs.image-tag }}"
+            result="Success"
           fi
                               
           echo "colorcode=$colorcode" >> $GITHUB_OUTPUT
