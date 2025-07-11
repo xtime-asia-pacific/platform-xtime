@@ -27,8 +27,8 @@
     <distributionManagement>
         <snapshotRepository>
             <id>artifactory</id>
-            <name>CAI Artifactory-snapshots</name>
-            <url>https://artifactory.coxautoinc.com/artifactory/xtime-maven-snapshots</url>
+            <name>AUS Artifactory-snapshots</name>
+            <url>https://xtimeaus.jfrog.io/artifactory/xtime-maven-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
